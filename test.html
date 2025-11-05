@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desserts Shop</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      padding: 20px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      padding: 10px;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Desserts Menu</h2>
+
+  <label>Filter by Category:</label>
+  <select id="filter">
+      <option value="all">All</option>
+  </select>
+
+  <h3 id="resultCount"></h3>
+
+  <div class="products" id="productList"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

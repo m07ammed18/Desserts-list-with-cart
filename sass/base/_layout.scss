@@ -1,0 +1,149 @@
+@use "../helpers" as *;
+main {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 40px;
+  height: 70%;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  .products-container {
+    width: calc(100% * 2 / 3);
+    h1 {
+      margin-bottom: 30px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      .card {
+        > img {
+          width: 100%;
+          border-radius: 8px;
+        }
+        .add-to-cart {
+          background-color: #fff;
+          color: #000;
+          font-weight: $font-semi-bold;
+          border: 1px solid $red;
+          text-align: center;
+          width: fit-content;
+          padding: 0.5rem 2rem;
+          border-radius: 50px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          position: relative;
+          top: -6%;
+          left: 50%;
+          transform: translateX(-50%);
+          cursor: pointer;
+          transition: 0.3s;
+          &:hover {
+            color: $red;
+          }
+          img {
+            max-width: 100%;
+          }
+        }
+        .info {
+          margin-top: -15px;
+          .category {
+            color: $rose400;
+            margin-bottom: 5px;
+          }
+          h4 {
+            margin-bottom: 5px;
+            font-weight: $font-regular;
+          }
+          span {
+            color: $red;
+            font-weight: $font-semi-bold;
+          }
+        }
+      }
+    }
+  }
+  .cart {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    width: calc(100% / 3);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    h1 {
+      color: $red;
+      font-weight: $font-bold;
+      font-size: 1.5rem;
+    }
+    .cart-elements .element {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid #eee;
+      h4 {
+        font-weight: $font-semi-bold;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: 14px;
+        .number {
+          color: $red;
+          margin-right: 5px;
+        }
+        .price {
+          color: $rose300;
+          margin-right: 5px;
+        }
+        .total-price {
+          color: $rose400;
+          font-weight: 600;
+        }
+      }
+      .remove {
+        cursor: pointer;
+      }
+    }
+    .total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 1rem .5rem;
+      background-color: $rose100;
+      border-radius: 8px;
+    }
+    button {
+      background-color: $red;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: .3s;
+      &:hover {
+        background-color: $rose900;
+      }
+    }
+  }
+}
