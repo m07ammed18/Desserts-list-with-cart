@@ -1,143 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/main.min.css" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./assets/images/favicon-32x32.png"
-    />
-    <title>Frontend Mentor | Product list with cart</title>
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <div class="container">
-        <section class="products-container">
-          <h1>Desserts</h1>
-          <div class="products">
-            <div class="card">
-              <img src="./assets/images/image-meringue-desktop.jpg"alt="">
-              <button class="add-to-cart"><img src="./assets/images/icon-add-to-cart.svg" alt=""><span>Add to cart</span></button>
-              <div class="info">
-                <p class="category">Cake</p>
-                <h4>Red Velvet Cake</h4>
-                <span>$4.50</span>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/images/image-brownie-desktop.jpg"alt="">
-              <button class="add-to-cart"><img src="./assets/images/icon-add-to-cart.svg" alt=""><span>Add to cart</span></button>
-              <div class="info">
-                <p class="category">Cake</p>
-                <h4>Red Velvet Cake</h4>
-                <span>$4.50</span>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/images/image-creme-brulee-desktop.jpg"alt="">
-              <button class="add-to-cart"><img src="./assets/images/icon-add-to-cart.svg" alt=""><span>Add to cart</span></button>
-              <div class="info">
-                <p class="category">Cake</p>
-                <h4>Red Velvet Cake</h4>
-                <span>$4.50</span>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/images/image-cake-desktop.jpg"alt="">
-              <button class="add-to-cart"><img src="./assets/images/icon-add-to-cart.svg" alt=""><span>Add to cart</span></button>
-              <div class="info">
-                <p class="category">Cake</p>
-                <h4>Red Velvet Cake</h4>
-                <span>$4.50</span>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/images/image-cake-desktop.jpg"alt="">
-              <button class="add-to-cart"><img src="./assets/images/icon-add-to-cart.svg" alt=""><span>Add to cart</span></button>
-              <div class="info">
-                <p class="category">Cake</p>
-                <h4>Red Velvet Cake</h4>
-                <span>$4.50</span>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/images/image-cake-desktop.jpg"alt="">
-              <button class="add-to-cart"><img src="./assets/images/icon-add-to-cart.svg" alt=""><span>Add to cart</span></button>
-              <div class="info">
-                <p class="category">Cake</p>
-                <h4>Red Velvet Cake</h4>
-                <span>$4.50</span>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/images/image-cake-desktop.jpg"alt="">
-              <button class="add-to-cart"><img src="./assets/images/icon-add-to-cart.svg" alt=""><span>Add to cart</span></button>
-              <div class="info">
-                <p class="category">Cake</p>
-                <h4>Red Velvet Cake</h4>
-                <span>$4.50</span>
-              </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/main.min.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+  <title>Frontend Mentor | Product list with cart</title>
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <section class="products-container">
+        <h1>Desserts</h1>
+        <div class="products" id="products-list">
+          <!-- <div class="card">
+            <img src="./assets/images/image-meringue-desktop.jpg" alt="">
+            <div class="cart-btn in-cart"><button><img src="./assets/images/icon-decrement-quantity.svg" alt=""></button><span>4</span><button><img src="./assets/images/icon-increment-quantity.svg"
+              alt=""></button></div>
+            <div class="info">
+              <p class="category">Cake</p>
+              <h4>Red Velvet Cake</h4>
+              <span>$4.50</span>
             </div>
           </div>
-        </section>
-        <section class="cart">
-          <h1>Your Cart (4)</h1>
-          <div class="cart-elements">
-            <div class="element">
-              <div class="element-info">
-                <h4>Classic Tiramisu</h4>
-              <p><span class="number">2X</span> <span class="price">@ $5.50</span><span class="total-price">$11.0</span></p>
-              </div>
-              <div class="remove"><img src="./assets/images/icon-remove-item.svg" alt=""></div>
+          <div class="card">
+            <img src="./assets/images/image-brownie-desktop.jpg" alt="">
+            <div  class="cart-btn"><button class="add-to-cart"><img src="./assets/images/icon-add-to-cart.svg" alt=""><span>Add to
+              cart</span></button></div>
+            <div class="info">
+              <p class="category">Cake</p>
+              <h4>Red Velvet Cake</h4>
+              <span>$4.50</span>
             </div>
-            <div class="element">
-              <div class="element-info">
-                <h4>Classic Tiramisu</h4>
-              <p><span class="number">2X</span> <span class="price">@ $5.50</span><span class="total-price">$11.0</span></p>
-              </div>
-              <div class="remove"><img src="./assets/images/icon-remove-item.svg" alt=""></div>
-            </div>
-            <div class="element">
-              <div class="element-info">
-                <h4>Classic Tiramisu</h4>
-              <p><span class="number">2X</span> <span class="price">@ $5.50</span><span class="total-price">$11.0</span></p>
-              </div>
-              <div class="remove"><img src="./assets/images/icon-remove-item.svg" alt=""></div>
-            </div>
-            <div class="element">
-              <div class="element-info">
-                <h4>Classic Tiramisu</h4>
-              <p><span class="number">2X</span> <span class="price">@ $5.50</span><span class="total-price">$11.0</span></p>
-              </div>
-              <div class="remove"><img src="./assets/images/icon-remove-item.svg" alt=""></div>
-            </div>
-          </div>
-          <div class="total">
-            <span>Order Total</span>
-            <h2>$44.0</h2>
-          </div>
-          <div class="note"><img src="./assets/images/icon-carbon-neutral.svg" alt="">This is a delivery</div>
-          <button>Confirm Order</button>
-        </section>
+          </div> -->
+        </div>
+      </section>
+       <section class="cart" id="cart-section">
+        <h1>Your Cart <span id="cart-count">(4)</span></h1>
+        <div class="cart-elements" id="cart-elements">
+        </div>
+        <div class="total">
+          <span>Order Total</span>
+          <h2>$0</h2>
+        </div>
+        <div class="note"><img src="./assets/images/icon-carbon-neutral.svg" alt="">This is a <strong>carbon-neutral</strong> delivery</div>
+        <button class="confirm-btn">Confirm Order</button>
+      </section> 
+      <div class="cart-empty" id="cart-empty" style="display: none;">
+        <h1>Your Cart <span>(0)</span></h1>
+        <div class="cart-empty-img">
+          <img src="./assets/images/illustration-empty-cart.svg" alt="Empty Cart">
+          <p>Your added items will appear here</p>
+        </div>
       </div>
-    </main>
-    <!-- <div class="attribution">
-      Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
-      Coded by <a href="#">Your Name Here</a>.
-    </div> -->
-    <script src="./main.js"></script>
-  </body>
+      
+    </div>
+  </main>
+  <footer class="attribution">
+    Challenge by
+    <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+    Coded by <a href="#">Mohammed Belhadj</a>.
+  </footer>
+  <div class="popup-overlay" style="display: none;"></div>
+  <div class="confirm-box" style="display: none;">
+    <div class="title">
+      <img src="./assets/images/icon-order-confirmed.svg" alt="Icon order confirmed">
+      <h1>Order confirmed</h1>
+      <p>We hope you enjoy your foot!</p>
+    </div>
+    <div class="orders">
+      <div class="order-elements">
+        <div class="order">
+          <div class="info">
+            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
+            <div class="text">
+              <h4>Baklava</h4>
+              <span class="number">X5</span><span class="price">@ $5.4</span>
+            </div>
+          </div>
+          <div class="total-price">$27.0</div>
+        </div>
+        <div class="order">
+          <div class="info">
+            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
+            <div class="text">
+              <h4>Baklava</h4>
+              <span class="number">X5</span><span class="price">@ $5.4</span>
+            </div>
+          </div>
+          <div class="total-price">$27.0</div>
+        </div>
+        <div class="order">
+          <div class="info">
+            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
+            <div class="text">
+              <h4>Baklava</h4>
+              <span class="number">X5</span><span class="price">@ $5.4</span>
+            </div>
+          </div>
+          <div class="total-price">$27.0</div>
+        </div>
+        <div class="order">
+          <div class="info">
+            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
+            <div class="text">
+              <h4>Baklava</h4>
+              <span class="number">X5</span><span class="price">@ $5.4</span>
+            </div>
+          </div>
+          <div class="total-price">$27.0</div>
+        </div>
+      </div>
+      <div class="total">
+        <p>Order Total</p>
+        <h2>$44.0</h2>
+      </div>
+    </div>
+    <button id="order-btn">Start New Order</button>
+  </div> 
+  <script src="./main.js"></script>
+</body>
+
 </html>

@@ -35,7 +35,6 @@ body {
   background-color: hsl(20, 50%, 98%);
   font-family: "RedHatText", sans-serif;
   font-size: 16px;
-  height: 100vh;
 }
 
 .container {
@@ -87,7 +86,7 @@ main {
   -ms-flex-line-pack: center;
       align-content: center;
   gap: 40px;
-  height: 70%;
+  padding: 100px 0;
 }
 @media (max-width: 768px) {
   .container {
@@ -115,38 +114,88 @@ main {
   width: 100%;
   border-radius: 8px;
 }
-.container .products-container .products .card .add-to-cart {
-  background-color: #fff;
-  color: #000;
-  font-weight: 600;
-  border: 1px solid hsl(14, 86%, 42%);
-  text-align: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 0.5rem 2rem;
+.container .products-container .products .card .cart-btn {
   border-radius: 50px;
+  width: 70%;
+  position: relative;
+  top: -7%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.container .products-container .products .card .cart-btn .add-to-cart {
+  border: 1px solid hsl(14, 86%, 42%);
+  width: 100%;
+  padding: 0.6rem 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 5px;
-  position: relative;
-  top: -6%;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 3px;
+  border-radius: 50px;
+  background-color: white;
   cursor: pointer;
+  font-weight: 600;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
-.container .products-container .products .card .add-to-cart:hover {
+.container .products-container .products .card .cart-btn .add-to-cart img {
+  width: 16px;
+}
+.container .products-container .products .card .cart-btn .add-to-cart:hover {
   color: hsl(14, 86%, 42%);
 }
-.container .products-container .products .card .add-to-cart img {
-  max-width: 100%;
+.container .products-container .products .card .cart-btn .quantity-controls {
+  background-color: hsl(14, 86%, 42%);
+  width: 100%;
+  padding: 0.6rem 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 50px;
+  font-weight: 600;
+  color: white;
+}
+.container .products-container .products .card .cart-btn .quantity-controls.hidden {
+  display: none;
+}
+.container .products-container .products .card .cart-btn .quantity-controls button {
+  width: 25px;
+  height: 25px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: transparent;
+  cursor: pointer;
+}
+.container .products-container .products .card .cart-btn .quantity-controls button img {
+  width: 10px;
+}
+.container .products-container .products .card .cart-btn .quantity-controls button:hover {
+  background: white;
+}
+.container .products-container .products .card .cart-btn .quantity-controls button:hover img {
+  -webkit-filter: invert(35%) sepia(80%) saturate(3000%) hue-rotate(330deg);
+          filter: invert(35%) sepia(80%) saturate(3000%) hue-rotate(330deg);
 }
 .container .products-container .products .card .info {
   margin-top: -15px;
@@ -225,6 +274,8 @@ main {
 }
 .container .cart .cart-elements .element .remove {
   cursor: pointer;
+  border: none;
+  background-color: #fff;
 }
 .container .cart .total {
   display: -webkit-box;
@@ -252,7 +303,7 @@ main {
   background-color: hsl(13, 31%, 94%);
   border-radius: 8px;
 }
-.container .cart button {
+.container .cart .confirm-btn {
   background-color: hsl(14, 86%, 42%);
   color: #fff;
   border: none;
@@ -262,6 +313,182 @@ main {
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
-.container .cart button:hover {
+.container .cart .confirm-btn:hover {
+  background-color: hsl(14, 65%, 9%);
+}
+.container .cart-empty {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  width: 33.3333333333%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .container .cart-empty {
+    width: 100%;
+  }
+}
+.container .cart-empty h1 {
+  color: hsl(14, 86%, 42%);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.container .cart-empty .cart-empty-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 30px 10px;
+}
+.container .cart-empty .cart-empty-img img {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+.container .cart-empty .cart-empty-img p {
+  width: 100%;
+  text-align: center;
+  color: hsl(7, 20%, 60%);
+}
+
+.popup-overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.confirm-box {
+  width: 45%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1001;
+}
+@media (max-width: 768px) {
+  .confirm-box {
+    width: 100%;
+  }
+}
+.confirm-box .title img {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+.confirm-box .title p {
+  color: hsl(7, 20%, 60%);
+  font-size: 14px;
+}
+.confirm-box .orders {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 10px;
+  background-color: hsl(20, 50%, 98%);
+  border-radius: 6px;
+}
+.confirm-box .orders .order-elements {
+  padding: 20px 0;
+}
+.confirm-box .orders .order {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.confirm-box .orders .order .info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+.confirm-box .orders .order .info img {
+  width: 40px;
+  border-radius: 6px;
+}
+.confirm-box .orders .order .info h4 {
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+.confirm-box .orders .order .info .number {
+  color: hsl(14, 86%, 42%);
+  margin-right: 10px;
+}
+.confirm-box .orders .order .info .price {
+  color: hsl(7, 20%, 60%);
+}
+.confirm-box .orders .total {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.confirm-box .orders .total p {
+  font-size: 18px;
+}
+.confirm-box button {
+  background-color: hsl(14, 86%, 42%);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 1rem;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.confirm-box button:hover {
   background-color: hsl(14, 65%, 9%);
 }/*# sourceMappingURL=main.css.map */

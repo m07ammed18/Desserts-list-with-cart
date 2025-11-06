@@ -10,7 +10,7 @@ main {
   flex-direction: row;
   align-content: center;
   gap: 40px;
-  height: 70%;
+  padding: 100px 0;
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -29,31 +29,73 @@ main {
           width: 100%;
           border-radius: 8px;
         }
-        .add-to-cart {
-          background-color: #fff;
-          color: #000;
-          font-weight: $font-semi-bold;
-          border: 1px solid $red;
-          text-align: center;
-          width: fit-content;
-          padding: 0.5rem 2rem;
+        .cart-btn {
           border-radius: 50px;
-          display: flex;
-          align-items: center;
-          gap: 5px;
+          width: 70%;
           position: relative;
-          top: -6%;
+          top: -7%;
           left: 50%;
           transform: translateX(-50%);
-          cursor: pointer;
-          transition: 0.3s;
-          &:hover {
-            color: $red;
+        
+          .add-to-cart {
+          border: 1px solid $red;
+            width: 100%;
+            padding: 0.6rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            border-radius: 50px;
+            background-color: white;
+            cursor: pointer;
+            font-weight: $font-semi-bold;
+            transition: 0.3s;
+            img {
+              width: 16px;
+            }
+            &:hover {
+              color: $red;
+            }
           }
-          img {
-            max-width: 100%;
+        
+          .quantity-controls {
+            background-color: $red;
+            width: 100%;
+            padding:0.6rem 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 50px;
+            font-weight: $font-semi-bold;
+            color: white;
+        
+            &.hidden {
+              display: none;
+            }
+        
+            button {
+              width: 25px;
+              height: 25px;
+              border: 2px solid white;
+              border-radius: 50%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: transparent;
+              cursor: pointer;
+              img {
+                width: 10px;
+              }
+              &:hover {
+                background: white;
+                img {
+                  filter: invert(35%) sepia(80%) saturate(3000%) hue-rotate(330deg);
+                }
+              }
+            }
           }
         }
+        
         .info {
           margin-top: -15px;
           .category {
@@ -117,6 +159,8 @@ main {
       }
       .remove {
         cursor: pointer;
+        border: none;
+        background-color: #fff;
       }
     }
     .total {
@@ -129,21 +173,150 @@ main {
       align-items: center;
       justify-content: center;
       gap: 5px;
-      padding: 1rem .5rem;
+      padding: 1rem 0.5rem;
       background-color: $rose100;
       border-radius: 8px;
     }
-    button {
+    .confirm-btn {
       background-color: $red;
       color: #fff;
       border: none;
       border-radius: 50px;
       padding: 1rem;
       cursor: pointer;
-      transition: .3s;
+      transition: 0.3s;
       &:hover {
         background-color: $rose900;
       }
+    }
+  }
+  .cart-empty {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    width: calc(100% / 3);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    h1 {
+      color: $red;
+      font-weight: $font-bold;
+      font-size: 1.5rem;
+    }
+    .cart-empty-img {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 10px;
+      img {
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+      p {
+        width: 100%;
+        text-align: center;
+        color: $rose400;
+      }
+    }
+  }
+}
+.popup-overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+.confirm-box {
+  width: 45%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1001;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  .title {
+    img {
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+    p {
+      color: $rose400;
+      font-size: 14px;
+    }
+  }
+  .orders {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: $main-bg;
+    border-radius: 6px;
+    .order-elements {
+      padding: 20px 0;
+    }
+    .order {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom : 1px solid #ccc;
+      .info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        img {
+          width: 40px;
+          border-radius: 6px;
+        }
+        h4{
+          font-weight: $font-regular;
+          margin-bottom: 5px;
+        }
+        .number {
+          color: $red;
+          margin-right: 10px;
+        }
+        .price {
+          color: $rose400
+        }
+      }
+    }
+    .total {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      p {
+        font-size: 18px;
+      }
+    }
+  }
+
+  button {
+    background-color: $red;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background-color: $rose900;
     }
   }
 }
