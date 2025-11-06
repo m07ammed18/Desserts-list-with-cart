@@ -1,0 +1,596 @@
+هاهي ملفات المشروع عدلها لتعمل
+_layout.scss
+@use "../helpers" as *;
+main {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 40px;
+  padding: 100px 0;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  .products-container {
+    width: calc(100% * 2 / 3);
+    h1 {
+      margin-bottom: 30px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      .card {
+        > img {
+          width: 100%;
+          border-radius: 8px;
+        }
+        .cart-btn {
+          border: 2px solid $red;
+          border-radius: 50px;
+          width: fit-content;
+          position: relative;
+          top: -7%;
+          left: 50%;
+          transform: translateX(-50%);
+        
+          .add-to-cart {
+            width: 100%;
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 50px;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: $font-semi-bold;
+            transition: 0.3s;
+            img {
+              width: 16px;
+            }
+            &:hover {
+              color: $red;
+            }
+          }
+        
+          .quantity-controls {
+            background-color: $red;
+            width: 100%;
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 50px;
+            font-weight: $font-semi-bold;
+            color: white;
+        
+            &.hidden {
+              display: none;
+            }
+        
+            button {
+              width: 25px;
+              height: 25px;
+              border: 2px solid white;
+              border-radius: 50%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: transparent;
+              cursor: pointer;
+              img {
+                width: 10px;
+              }
+              &:hover {
+                background: white;
+                img {
+                  filter: invert(35%) sepia(80%) saturate(3000%) hue-rotate(330deg);
+                }
+              }
+            }
+          }
+        }
+        
+        .info {
+          margin-top: -15px;
+          .category {
+            color: $rose400;
+            margin-bottom: 5px;
+          }
+          h4 {
+            margin-bottom: 5px;
+            font-weight: $font-regular;
+          }
+          span {
+            color: $red;
+            font-weight: $font-semi-bold;
+          }
+        }
+      }
+    }
+  }
+  .cart {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    width: calc(100% / 3);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    h1 {
+      color: $red;
+      font-weight: $font-bold;
+      font-size: 1.5rem;
+    }
+    .cart-elements .element {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid #eee;
+      h4 {
+        font-weight: $font-semi-bold;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: 14px;
+        .number {
+          color: $red;
+          margin-right: 5px;
+        }
+        .price {
+          color: $rose300;
+          margin-right: 5px;
+        }
+        .total-price {
+          color: $rose400;
+          font-weight: 600;
+        }
+      }
+      .remove {
+        cursor: pointer;
+        border: none;
+        background-color: #fff;
+      }
+    }
+    .total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 1rem 0.5rem;
+      background-color: $rose100;
+      border-radius: 8px;
+    }
+    .confirm-btn {
+      background-color: $red;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        background-color: $rose900;
+      }
+    }
+  }
+  .cart-empty {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    width: calc(100% / 3);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    h1 {
+      color: $red;
+      font-weight: $font-bold;
+      font-size: 1.5rem;
+    }
+    .cart-empty-img {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 10px;
+      img {
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+      p {
+        width: 100%;
+        text-align: center;
+        color: $rose400;
+      }
+    }
+  }
+}
+.popup-overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+.confirm-box {
+  width: 45%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1001;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  .title {
+    img {
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+    p {
+      color: $rose400;
+      font-size: 14px;
+    }
+  }
+  .orders {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: $main-bg;
+    border-radius: 6px;
+    .order-elements {
+      padding: 20px 0;
+    }
+    .order {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom : 1px solid #ccc;
+      .info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        img {
+          width: 40px;
+          border-radius: 6px;
+        }
+        h4{
+          font-weight: $font-regular;
+          margin-bottom: 5px;
+        }
+        .number {
+          color: $red;
+          margin-right: 10px;
+        }
+        .price {
+          color: $rose400
+        }
+      }
+    }
+    .total {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      p {
+        font-size: 18px;
+      }
+    }
+  }
+
+  button {
+    background-color: $red;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background-color: $rose900;
+    }
+  }
+}
+
+main.js 
+const productsList = document.getElementById("products-list");
+const cartElements = document.getElementById("cart-elements");
+let allProducts = [];
+let cartArray = [];
+
+// تحميل المنتجات
+fetch("data.json")
+  .then(res => res.json())
+  .then(data => {
+    allProducts = data;
+    showProducts(data);
+  });
+
+// ✅ عرض المنتجات مع الزرين
+function showProducts(products) {
+  productsList.innerHTML = "";
+  products.forEach(item => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    card.innerHTML = `
+      <img src="${item.image.desktop}" alt="${item.name}">
+      <div class="cart-btn">
+        <button class="add-to-cart">
+          <img src="./assets/images/icon-add-to-cart.svg" alt="">
+          <span>Add to Cart</span>
+        </button>
+        <div class="quantity-controls hidden">
+          <button class="decrease"><img src="./assets/images/icon-decrement-quantity.svg" alt=""></button>
+          <span class="quantity">1</span>
+          <button class="increase"><img src="./assets/images/icon-increment-quantity.svg" alt=""></button>
+        </div>
+      </div>
+      <div class="info">
+        <p class="category">${item.category}</p>
+        <h4>${item.name}</h4>
+        <span>$${item.price.toFixed(2)}</span>
+      </div>
+    `;
+
+    productsList.appendChild(card);
+  });
+}
+
+// ✅ Event Delegation (أفضل وأخف)
+productsList.addEventListener("click", (e) => {
+  const addBtn = e.target.closest(".add-to-cart");
+  const increaseBtn = e.target.closest(".increase");
+  const decreaseBtn = e.target.closest(".decrease");
+
+  // Add to cart
+  if (addBtn) {
+    const card = addBtn.closest(".card");
+    const name = card.querySelector("h4").innerText;
+    const price = parseFloat(card.querySelector("span").innerText.replace("$", ""));
+
+    cartArray.push({ name, price, quantity: 1 });
+
+    addBtn.classList.add("hidden");
+    card.querySelector(".quantity-controls").classList.remove("hidden");
+
+    updateCartUI(card, name);
+  }
+
+  // Increase quantity
+  if (increaseBtn) {
+    const card = increaseBtn.closest(".card");
+    const name = card.querySelector("h4").innerText;
+    const product = cartArray.find(p => p.name === name);
+    product.quantity++;
+
+    card.querySelector(".quantity").innerText = product.quantity;
+    updateCartUI(card, name);
+  }
+
+  // Decrease quantity
+  if (decreaseBtn) {
+    const card = decreaseBtn.closest(".card");
+    const name = card.querySelector("h4").innerText;
+    const product = cartArray.find(p => p.name === name);
+    product.quantity--;
+
+    if (product.quantity <= 0) {
+      cartArray = cartArray.filter(p => p.name !== name);
+      card.querySelector(".quantity-controls").classList.add("hidden");
+      card.querySelector(".add-to-cart").classList.remove("hidden");
+    } else {
+      card.querySelector(".quantity").innerText = product.quantity;
+    }
+    updateCartUI(card, name);
+  }
+});
+
+// ✅ تحديث السلة الجانبية
+function updateCartUI() {
+  const cartSection = document.getElementById("cart-section");
+  const emptySection = document.getElementById("cart-empty");
+  const totalElement = document.querySelector(".total h2");
+  const cartCount = document.getElementById("cart-count");
+
+  if (cartArray.length === 0) {
+    cartSection.style.display = "none";
+    emptySection.style.display = "block";
+    return;
+  }
+
+  cartSection.style.display = "block";
+  emptySection.style.display = "none";
+
+  cartElements.innerHTML = "";
+  let total = 0;
+
+  cartArray.forEach(item => {
+    const productTotal = item.quantity * item.price;
+    total += productTotal;
+
+    cartElements.innerHTML += `
+      <div class="element">
+        <div class="element-info">
+          <h4>${item.name}</h4>
+          <p><span class="number">${item.quantity}x</span>
+          <span class="price">@ $${item.price}</span>
+          <span class="total-price">$${productTotal.toFixed(2)}</span></p>
+        </div>
+      </div>
+    `;
+  });
+
+  cartCount.innerText = `(${cartArray.length})`;
+  totalElement.innerText = `$${total.toFixed(2)}`;
+}
+
+index.innerHTML
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/main.min.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+  <title>Frontend Mentor | Product list with cart</title>
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <section class="products-container">
+        <h1>Desserts</h1>
+        <div class="products" id="products-list">
+          <!-- <div class="card">
+            <img src="./assets/images/image-meringue-desktop.jpg" alt="">
+            <div class="cart-btn in-cart"><button><img src="./assets/images/icon-decrement-quantity.svg" alt=""></button><span>4</span><button><img src="./assets/images/icon-increment-quantity.svg"
+              alt=""></button></div>
+            <div class="info">
+              <p class="category">Cake</p>
+              <h4>Red Velvet Cake</h4>
+              <span>$4.50</span>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./assets/images/image-brownie-desktop.jpg" alt="">
+            <div  class="cart-btn"><button class="add-to-cart"><img src="./assets/images/icon-add-to-cart.svg" alt=""><span>Add to
+              cart</span></button></div>
+            <div class="info">
+              <p class="category">Cake</p>
+              <h4>Red Velvet Cake</h4>
+              <span>$4.50</span>
+            </div>
+          </div> -->
+        </div>
+      </section>
+       <section class="cart" id="cart-section">
+        <h1>Your Cart <span id="cart-count">(4)</span></h1>
+        <div class="cart-elements" id="cart-elements">
+        </div>
+        <div class="total">
+          <span>Order Total</span>
+          <h2>$0</h2>
+        </div>
+        <div class="note"><img src="./assets/images/icon-carbon-neutral.svg" alt="">This is a <strong>carbon-neutral</strong> delivery</div>
+        <button class="confirm-btn">Confirm Order</button>
+      </section> 
+      <div class="cart-empty" id="cart-empty" style="display: none;">
+        <h1>Your Cart <span>(0)</span></h1>
+        <div class="cart-empty-img">
+          <img src="./assets/images/illustration-empty-cart.svg" alt="Empty Cart">
+          <p>Your added items will appear here</p>
+        </div>
+      </div>
+      
+    </div>
+  </main>
+  <footer class="attribution">
+    Challenge by
+    <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+    Coded by <a href="#">Mohammed Belhadj</a>.
+  </footer>
+  <div class="popup-overlay" style="display: none;"></div>
+  <div class="confirm-box" style="display: none;">
+    <div class="title">
+      <img src="./assets/images/icon-order-confirmed.svg" alt="Icon order confirmed">
+      <h1>Order confirmed</h1>
+      <p>We hope you enjoy your foot!</p>
+    </div>
+    <div class="orders">
+      <div class="order-elements">
+        <div class="order">
+          <div class="info">
+            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
+            <div class="text">
+              <h4>Baklava</h4>
+              <span class="number">X5</span><span class="price">@ $5.4</span>
+            </div>
+          </div>
+          <div class="total-price">$27.0</div>
+        </div>
+        <div class="order">
+          <div class="info">
+            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
+            <div class="text">
+              <h4>Baklava</h4>
+              <span class="number">X5</span><span class="price">@ $5.4</span>
+            </div>
+          </div>
+          <div class="total-price">$27.0</div>
+        </div>
+        <div class="order">
+          <div class="info">
+            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
+            <div class="text">
+              <h4>Baklava</h4>
+              <span class="number">X5</span><span class="price">@ $5.4</span>
+            </div>
+          </div>
+          <div class="total-price">$27.0</div>
+        </div>
+        <div class="order">
+          <div class="info">
+            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
+            <div class="text">
+              <h4>Baklava</h4>
+              <span class="number">X5</span><span class="price">@ $5.4</span>
+            </div>
+          </div>
+          <div class="total-price">$27.0</div>
+        </div>
+      </div>
+      <div class="total">
+        <p>Order Total</p>
+        <h2>$44.0</h2>
+      </div>
+    </div>
+    <button id="order-btn">Start New Order</button>
+  </div> 
+  <script src="./main.js"></script>
+</body>
+
+</html>
