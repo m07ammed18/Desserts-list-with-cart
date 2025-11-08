@@ -22,7 +22,7 @@ Users can:
 
 ### 🔗 Links
 
-- **Solution URL:** https://your-solution-url.com  
+- **Solution URL:** [Here](https://www.frontendmentor.io/solutions/products-list-with-cart-iX2jNeaFKC)
 - **Live Demo:** [Here](https://m07ammed18.github.io/Desserts-list-with-cart/)
 
 ---
