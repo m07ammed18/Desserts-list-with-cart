@@ -18,6 +18,7 @@
 </head>
 <body>
   <main>
+    <div class="success-msg hidden"><img src="./assets/images/icon-order-confirmed.svg" alt=""> Your order has been placed successfully!</div>
     <div class="container">
       <section class="products-container">
         <h1>Desserts</h1>
@@ -70,63 +71,25 @@
     <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
     Coded by <a href="#">Mohammed Belhadj</a>.
   </footer>
-  <div class="popup-overlay" style="display: none;"></div>
-  <div class="confirm-box" style="display: none;">
-    <div class="title">
-      <img src="./assets/images/icon-order-confirmed.svg" alt="Icon order confirmed">
-      <h1>Order confirmed</h1>
-      <p>We hope you enjoy your foot!</p>
+  <div class="popup-overlay hidden"></div>
+
+<div class="confirm-box hidden" id="confirmPopup">
+  <div class="title">
+    <img src="./assets/images/icon-order-confirmed.svg" alt="Icon order confirmed">
+    <h1>Order confirmed</h1>
+    <p>We hope you enjoy your food!</p>
+  </div>
+
+  <div class="orders">
+    <div class="confirmed-items" id="confirmedItems"></div>
+    <div class="total">
+      <p>Order Total</p>
+      <h2 id="confirmedTotal">$0.00</h2>
     </div>
-    <div class="orders">
-      <div class="order-elements">
-        <div class="order">
-          <div class="info">
-            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
-            <div class="text">
-              <h4>Baklava</h4>
-              <span class="number">X5</span><span class="price">@ $5.4</span>
-            </div>
-          </div>
-          <div class="total-price">$27.0</div>
-        </div>
-        <div class="order">
-          <div class="info">
-            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
-            <div class="text">
-              <h4>Baklava</h4>
-              <span class="number">X5</span><span class="price">@ $5.4</span>
-            </div>
-          </div>
-          <div class="total-price">$27.0</div>
-        </div>
-        <div class="order">
-          <div class="info">
-            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
-            <div class="text">
-              <h4>Baklava</h4>
-              <span class="number">X5</span><span class="price">@ $5.4</span>
-            </div>
-          </div>
-          <div class="total-price">$27.0</div>
-        </div>
-        <div class="order">
-          <div class="info">
-            <img src="./assets/images/image-baklava-thumbnail.jpg" alt="">
-            <div class="text">
-              <h4>Baklava</h4>
-              <span class="number">X5</span><span class="price">@ $5.4</span>
-            </div>
-          </div>
-          <div class="total-price">$27.0</div>
-        </div>
-      </div>
-      <div class="total">
-        <p>Order Total</p>
-        <h2>$44.0</h2>
-      </div>
-    </div>
-    <button id="order-btn">Start New Order</button>
-  </div> 
-  <script src="./main.js"></script>
+  </div>
+
+  <button id="order-btn">Start New Order</button>
+</div>
+  <script src="./script.js"></script>
 </body>
 </html>

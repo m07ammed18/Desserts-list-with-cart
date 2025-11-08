@@ -5,21 +5,21 @@ const emptySection = document.getElementById("cart-empty");
 const cartCount = document.getElementById("cart-count");
 const totalElement = document.querySelector(".total h2");
 
-let cartArray = [];
 let allProducts = [];
-
-// تحميل المنتجات من data.json
+let cartArray = [];
+updateCartUI();
+// Get data from JSON file
 fetch("data.json")
-  .then(res => res.json())
-  .then(data => {
+  .then((res) => res.json())
+  .then((data) => {
     allProducts = data;
     showProducts(data);
   });
 
-// ✅ عرض المنتجات في الصفحة
+// Show prodcuts in DOM
 function showProducts(products) {
   productsList.innerHTML = "";
-  products.forEach(item => {
+  products.forEach((item) => {
     const card = document.createElement("div");
     card.classList.add("card");
 
@@ -49,27 +49,25 @@ function showProducts(products) {
   });
 }
 
-// ✅ Event Delegation (تحسين لتقليل عدد Listeners)
 productsList.addEventListener("click", (e) => {
-
   const addBtn = e.target.closest(".add-to-cart");
   const increaseBtn = e.target.closest(".increase");
   const decreaseBtn = e.target.closest(".decrease");
 
-  // إضافة للسلة
+  // Add to cart
   if (addBtn) {
     const card = addBtn.closest(".card");
     addProduct(card);
     addBtn.style.display = "none";
   }
 
-  // زيادة
+  // Increase
   if (increaseBtn) {
     const card = increaseBtn.closest(".card");
     updateQuantity(card, "inc");
   }
 
-  // إنقاص
+  // Decrease
   if (decreaseBtn) {
     const card = decreaseBtn.closest(".card");
     updateQuantity(card, "dec");
@@ -79,10 +77,10 @@ productsList.addEventListener("click", (e) => {
   }
 });
 
-// ✅ إضافة منتج
+// Add product
 function addProduct(card) {
   const name = card.querySelector("h4").innerText;
-  const price = parseFloat(card.querySelector("span").innerText.slice(1));
+  const price = parseFloat(card.querySelector(".info span").innerText.slice(1));
 
   cartArray.push({ name, price, quantity: 1 });
 
@@ -92,16 +90,16 @@ function addProduct(card) {
   updateCartUI();
 }
 
-// ✅ زيادة أو إنقاص كمية المنتج
+// Increase or decrease product
 function updateQuantity(card, type) {
   const name = card.querySelector("h4").innerText;
-  const product = cartArray.find(p => p.name === name);
+  const product = cartArray.find((p) => p.name === name);
 
   if (type === "inc") product.quantity++;
   if (type === "dec") product.quantity--;
 
   if (product.quantity <= 0) {
-    cartArray = cartArray.filter(p => p.name !== name);
+    cartArray = cartArray.filter((p) => p.name !== name);
 
     card.querySelector(".quantity-controls").classList.add("hidden");
     card.querySelector(".add-to-cart").classList.remove("hidden");
@@ -112,23 +110,22 @@ function updateQuantity(card, type) {
   updateCartUI();
 }
 
-// ✅ تحديث واجهة السلة الجانبية
+// Update cart UI
 function updateCartUI() {
-
   if (cartArray.length === 0) {
     cartSection.style.display = "none";
-    emptySection.style.display = "block";
+    emptySection.style.display = "flex";
     return;
   }
 
-  cartSection.style.display = "block";
+  cartSection.style.display = "flex";
   emptySection.style.display = "none";
 
   cartElements.innerHTML = "";
 
   let total = 0;
 
-  cartArray.forEach(item => {
+  cartArray.forEach((item) => {
     const productTotal = item.quantity * item.price;
     total += productTotal;
 
@@ -149,3 +146,58 @@ function updateCartUI() {
   cartCount.innerText = `(${cartArray.length})`;
   totalElement.innerText = `$${total.toFixed(2)}`;
 }
+
+// Confirm Box Logic
+const popup = document.getElementById("confirmPopup");
+const overlay = document.querySelector(".popup-overlay");
+const confirmedItemsContainer = document.getElementById("confirmedItems");
+const confirmedTotal = document.getElementById("confirmedTotal");
+const confirmBtn = document.querySelector(".confirm-btn");
+
+confirmBtn.addEventListener("click", () => {
+  showConfirmPopup();
+});
+
+function showConfirmPopup() {
+  confirmedItemsContainer.innerHTML = "";
+  let total = 0;
+
+  cartArray.forEach((item) => {
+    const productData = allProducts.find((p) => p.name === item.name);
+    const thumbnail = productData.image.thumbnail;
+
+    const productTotal = (item.quantity * item.price).toFixed(2);
+    total += parseFloat(productTotal);
+
+    confirmedItemsContainer.innerHTML += `
+      <div class="order">
+        <div class="info">
+          <img src="${thumbnail}" alt="${item.name}">
+          <div class="text">
+            <h4>${item.name}</h4>
+            <span class="number">${item.quantity}x</span>
+            <span class="price">@ $${item.price.toFixed(2)}</span>
+          </div>
+        </div>
+        <div class="total-price">$${productTotal}</div>
+      </div>
+    `;
+  });
+
+  confirmedTotal.innerText = `$${total.toFixed(2)}`;
+
+  popup.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+}
+
+document.getElementById("order-btn").addEventListener("click", () => {
+  popup.classList.add("hidden");
+  overlay.classList.add("hidden");
+
+  cartArray = [];
+  updateCartUI();
+  document.querySelector(".success-msg").classList.remove("hidden");
+  setTimeout(() => {
+    document.querySelector(".success-msg").classList.add("hidden");
+  }, 3000);
+});
