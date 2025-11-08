@@ -77,7 +77,7 @@ productsList.addEventListener("click", (e) => {
   }
 });
 
-// Add product
+// Add product to cart
 function addProduct(card) {
   const name = card.querySelector("h4").innerText;
   const price = parseFloat(card.querySelector(".info span").innerText.slice(1));
@@ -147,7 +147,7 @@ function updateCartUI() {
   totalElement.innerText = `$${total.toFixed(2)}`;
 }
 
-// Confirm Box Logic
+// Confirm Box Functionality
 const popup = document.getElementById("confirmPopup");
 const overlay = document.querySelector(".popup-overlay");
 const confirmedItemsContainer = document.getElementById("confirmedItems");
